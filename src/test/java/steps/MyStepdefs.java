@@ -17,9 +17,9 @@ public class MyStepdefs extends StepDefinition {
     }
 
 	
-	@Entonces("seleccionar los botones {string}")
-    public void seleccionar_los_botones(String validation) {
-		searchInput(validation);
+	@Entonces("validacion de descarga {string}")
+    public void validacion_de_descarga(String DownDir) {
+		chromeDownload(DownDir);
     }
     
 	
