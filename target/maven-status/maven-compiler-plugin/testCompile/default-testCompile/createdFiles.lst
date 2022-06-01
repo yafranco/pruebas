@@ -1,0 +1,3 @@
+seleCucum\StepDefinition.class
+steps\MyStepdefs.class
+seleCucum\runCucumberSeleniumTest.class
