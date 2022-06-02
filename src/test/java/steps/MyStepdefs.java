@@ -1,5 +1,8 @@
 package steps;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
@@ -18,7 +21,7 @@ public class MyStepdefs extends StepDefinition {
 
 	
 	@Entonces("validacion de descarga {string}")
-    public void validacion_de_descarga(String DownDir) {
+    public void validacion_de_descarga(String DownDir) throws MalformedURLException, IOException {
 		chromeDownload(DownDir);
     }
     

@@ -1,7 +1,12 @@
 package seleCucum;
 
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -51,12 +56,29 @@ public class StepDefinition {
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector("body.toolbar-closed:nth-child(2) div.wpthemeLayoutContainers.wpthemeLayoutContainersHidden:nth-child(2) div.wpthemeInner div.component-control.id-Z7_8252I1C0MO0OF0ABLVQR7TGHV7:nth-child(2) section.ibmPortalControl.wpthemeControl.wpthemeHidden.a11yRegionTarget:nth-child(2) div.wpthemeControlBody.wpthemeOverflowAuto.wpthemeClear div.container-fluid.none:nth-child(2) div.row div.col-xs-12 div.tabs-verticales.container-fluid.tabs-horizontal div.row ul.nav.nav-tabs.responsive.col-sm-3.hidden-xs.hidden-sm li.none:nth-child(4) > a:nth-child(1)"))));
             driver.findElement(By.cssSelector("body.toolbar-closed:nth-child(2) div.wpthemeLayoutContainers.wpthemeLayoutContainersHidden:nth-child(2) div.wpthemeInner div.component-control.id-Z7_8252I1C0MO0OF0ABLVQR7TGHV7:nth-child(2) section.ibmPortalControl.wpthemeControl.wpthemeHidden.a11yRegionTarget:nth-child(2) div.wpthemeControlBody.wpthemeOverflowAuto.wpthemeClear div.container-fluid.none:nth-child(2) div.row div.col-xs-12 div.tabs-verticales.container-fluid.tabs-horizontal div.row ul.nav.nav-tabs.responsive.col-sm-3.hidden-xs.hidden-sm li.none:nth-child(4) > a:nth-child(1)")).click();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-     }
-        public static void chromeDownload(String DownDir) {
-               
-            /*validacion para la descarga*/
-             
+            
+/*click en Prohibiciones*/
         	
+            wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//*[@id=\"tab4\"]/table/tbody/tr[2]/td[2]/span/a"))));
+            driver.findElement(By.xpath("//*[@id=\"tab4\"]/table/tbody/tr[2]/td[2]/span/a")).click();
+            driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+     }
+        public static void chromeDownload(String DownDir) throws MalformedURLException, IOException {
+            
+            /**/
+            
+            
+            String link = driver.findElement(By.xpath("//*[@id=\"tab4\"]/table/tbody/tr[2]/td[2]/span/a")).getAttribute("href"); 
+        	
+            HttpURLConnection httpConnection = 	(HttpURLConnection) (new URL(link).openConnection());
+            httpConnection.setRequestMethod("HEAD");
+            httpConnection.connect();
+            
+            String contentType = httpConnection.getContentType();
+            
+            assertEquals(contentType, "application/pdf");
+            
+            System.out.println("ContentType " + contentType );
         }
      }
 
